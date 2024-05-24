@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload and Download</title>
+</head>
+<body>
+  <h2>Upload File</h2>
+  <input type="file" id="fileInput">
+  <button onclick="uploadFile()">Upload</button>
+
+  <h2>Download File</h2>
+  <button onclick="downloadFile()">Download</button>
+
+  <script>
+    let uploadedFile;
+
+    function uploadFile() {
+      const fileInput = document.getElementById('fileInput');
+      uploadedFile = fileInput.files[0];
+      console.log('File uploaded:', uploadedFile.name);
+    }
+
+    function downloadFile() {
+      if (!uploadedFile) {
+        console.error('No file uploaded');
+        return;
+      }
+
+      const downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(uploadedFile);
+      downloadLink.download = uploadedFile.name;
+      downloadLink.click();
+    }
+  </script>
+</body>
+</html>
